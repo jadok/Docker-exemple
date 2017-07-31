@@ -1,0 +1,29 @@
+version: "2"
+services:
+  frontend:
+    build:
+      context: ../front
+      dockerfile: Dockerfile
+    # replace username/repo:tag with your name and image details
+    #image: docker_test_front
+    restart: "unless-stopped"
+    environment:
+      PLATFORM: dev
+    volumes:
+      - ${WORKSPACE_PATH}/front:/usr/src/app
+    ports:
+      - "8080:8080"
+  backend:
+        # replace username/repo:tag with your name and image details
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    #image: docker_test_back
+    restart: "unless-stopped"
+    environment:
+      PLATFORM: dev
+    volumes:
+      - ${WORKSPACE_PATH}/server:/usr/src/app
+    ports:
+      - "9898:9898"
+
